@@ -75,7 +75,10 @@ class AddProductForm(forms.Form):
         if option_values:
             for i, name in enumerate(option_names):
                 values = list(option_values[i])
-                values.remove(None)
+                try:
+                    values.remove(None)
+                except ValueError:
+                    pass
                 if values:
                     field = forms.ChoiceField(label=option_labels[i],
                                               choices=make_choices(values))
