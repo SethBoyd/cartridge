@@ -1,4 +1,3 @@
-
 from copy import copy
 from datetime import date
 from itertools import dropwhile, takewhile
@@ -75,7 +74,8 @@ class AddProductForm(forms.Form):
             unit_price__isnull=False).values_list(*option_names))
         if option_values:
             for i, name in enumerate(option_names):
-                values = filter(None, set(option_values[i]))
+                values = list(option_values[i])
+                values.remove(None)
                 if values:
                     field = forms.ChoiceField(label=option_labels[i],
                                               choices=make_choices(values))
